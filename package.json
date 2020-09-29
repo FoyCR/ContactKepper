@@ -12,7 +12,7 @@
     "build": "rm -rf dist && webpack --config webpack.config.ts",
     "test": "npm run test"
   },
-  "author": "Denis",
+  "author": "Foy",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
