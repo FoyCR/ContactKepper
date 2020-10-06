@@ -17,7 +17,6 @@ export const  handleError = (err: ErrorHandler, req: Request, res: Response):voi
         status: err.name,
         statusCode,
         message,
-        errors: !errors.isEmpty()? errors.array() : null
-    })
-    
+        errors: !errors.isEmpty() ? errors.array() : null
+    })    
 }

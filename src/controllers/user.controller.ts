@@ -4,6 +4,8 @@ import jwt from 'jsonwebtoken';
 import config from 'config';
 import User from '../models/user'
 import {ErrorHandler, handleError} from '../error'
+import bodyUserValidations from '../middlewares/user/user.validator';
+import validatorHandler from  '../middlewares/validator';
 
 const router = Router();
 
@@ -13,7 +15,7 @@ const router = Router();
 // @access     Public
 // =============================
     
-router.post('/', async (req:Request, res:Response)=> {
+router.post('/', bodyUserValidations, validatorHandler,  async (req:Request, res:Response)=> {
     const {name, email, password} = req.body;
     try{
         let user = await User.findOne({email});
@@ -27,11 +29,8 @@ router.post('/', async (req:Request, res:Response)=> {
             password
         });
 
-            
-        const salt = await bcrypt.genSalt(10);
-        console.log('ooa foy 2');
+        const salt = await bcrypt.genSalt(10);        
         user.password = await bcrypt.hash(password, salt);
-        console.log('ooa foy 3');
         await user.save();
         
         const payload = {
